@@ -1,0 +1,49 @@
+Value Required REM_CHASSIS_ID (\S+)
+Value REM_PORT_ID (\S+)
+Value REM_PORT_DESCRIPTION (\S+)
+Value LOCL_PORT_ID (\S+)
+Value NBR_SINCE (\d+\s\w+\s\d+\s\w+\s\d+:\d+:\d+)
+Value REM_SYSTEM_NAME (.*)
+Value REM_MGMT_ADDR4 (\S+)
+Value REM_MGMT_ADDR6 (\S+)
+Value REM_OS_VER (\S+)
+Value REM_MODEL (\S+)
+Value MTU (\d+)
+Value REM_SVC_TAG (\S+)
+
+
+
+Start
+  ^Remote\sChassis\sID\sSubtype:\sMac\saddress\s(\d+)
+  ^Remote\sChassis\sID:\s${REM_CHASSIS_ID}
+  ^Remote\sPort\sSubtype:\sInterface\sname\s(\d+)
+  ^Remote\sPort\sID:\s${REM_PORT_ID}
+  ^Remote\sPort\sDescription:\s${REM_PORT_DESCRIPTION}
+  ^Local\sPort\sID:\s${LOCL_PORT_ID}
+  ^Locally\sassigned\sremote\sNeighbor\sIndex:\s\d+
+  ^Remote\sTTL:\s\d+
+  ^Information\svalid\sfor\snext\s\d+\sseconds
+  ^Time\ssince\slast\sinformation\schange\sof\sthis\sneighbor:\s${NBR_SINCE}
+  ^Remote\sSystem\sName:\s${REM_SYSTEM_NAME}
+  ^Remote\sManagement\sAddress\s(IPv4):\s${REM_MGMT_ADDR4}
+  ^Remote\sManagement\sAddress\s(IPv6):\s${REM_MGMT_ADDR6}
+  ^Remote\sSystem\sDesc:\sDell\sEMC\sNetworking\sOS10\sEnterprise.
+  ^Copyright\s(c)\s1999-2021\sby\sDell\sInc.\sAll\sRights\sReserved.
+  ^System\sDescription:\sOS10\sEnterprise.
+  ^OS\sVersion:\s${REM_OS_VER}
+  ^System\sType:\s${REM_MODEL}
+  ^Existing\sSystem\sCapabilities:\s\sRepeater,\sBridge,\sRouter
+  ^Enabled\sSystem\sCapabilities:\s\sRepeater,\sBridge,\sRouter
+  ^Remote\sMax\sFrame\sSize:\s${MTU}
+  ^Remote\sAggregation\sStatus:\sfalse
+  ^MAC\sPHY\sConfiguration:
+  ^\s+Auto-neg\ssupported:\s\d+
+  ^\s+Auto-neg\senabled:\s\d+
+  ^\s+Auto-neg\sadvertised\scapabilities:
+  ^\s+\s+1000BASE-T\shalf\sduplex\smode
+  ^Dell\sEMC\sOrganization\sSpecific\sDetail:
+  ^Originator:\sSwitch
+  ^\s+Service\sTag:\s${REM_SVC_TAG}
+  ^\s+Product\sBase:\s
+  ^\s+Product\sSerial\sNumber:\s\d+
+  ^\s+Product\sPart\sNumber:\s.* -> Record Start
