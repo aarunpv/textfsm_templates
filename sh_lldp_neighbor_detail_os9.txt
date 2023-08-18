@@ -1,0 +1,35 @@
+Value Required LOCAL_INTERFACE (\S+ \S+)
+Value NBR_COUNT (\d+)
+Value REM_CHASSIS_ID (\S+)
+Value REM_PORT_ID (\S+)
+Value REM_PORT_DESCRIPTION (.*)
+Value LOCL_PORT_ID (\S+ \S+)
+Value NBR_SINCE (\d+w\d+d\d+h)
+Value REM_SYSTEM_NAME (.*)
+
+Start
+  ^\s+Local\sInterface\s${LOCAL_INTERFACE}\shas\s${NBR_COUNT}\sneighbor
+  ^\s+Total\sFrames\sOut:\s574935
+  ^\s+Total\sFrames\sIn:\s+\d+
+  ^\s+Total\sNeighbor\sinformation\sAge\souts:\s\d+
+  ^\s+Total\sMultiple\sNeighbors\sDetected:\s\d+
+  ^\s+Total\sFrames\sDiscarded:\s\d+
+  ^\s+Total\sIn\sError\sFrames:\s\d+
+  ^\s+Total\sUnrecognized\sTLVs:\s\d+
+  ^\s+Total\sTLVs\sDiscarded:\s\d+
+  ^\s+Next\spacket\swill\sbe\ssent\safter\s\d+\sseconds
+  ^\s+UnknownTLVList:\s+\S+
+  ^\s+The\sneighbors\sare\sgiven\sbelow -> RemChassis
+
+RemChassis
+  ^\s+Remote\sChassis\sID\sSubtype:\s+Mac\saddress\s+(\d+)
+  ^\s+Remote\sChassis\sID:\s+${REM_CHASSIS_ID}
+  ^\s+Remote\sPort\sSubtype:\s+Interface\sname\s+(\d+)
+  ^\s+Remote\sPort\sID:\s+${REM_PORT_ID}
+  ^\s+Remote Port Description:\s+${REM_PORT_DESCRIPTION}
+  ^\s+Local\sPort\sID:\s+${LOCL_PORT_ID}
+  ^\s+Locally\sassigned\sremote\sNeighbor\sIndex:\s+\d+
+  ^\s+Remote\sTTL:\s+\d+
+  ^\s+Information\svalid\sfor\snext\s\d+seconds
+  ^\s+Time\ssince\slast\sinformation\schange\sof\sthis\sneighbor:\s+${NBR_SINCE}
+  ^\s+Remote\sSystem\sName:\s+${REM_SYSTEM_NAME} -> Record Start
