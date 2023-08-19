@@ -1,0 +1,6 @@
+Value USERNAME (\S+)
+Value ROLE (\S+)
+Value PRIV_LVL (\d+)
+
+Start
+  ^username\s${USERNAME}\spassword\s\d+\s\S+\s*(?:privilege\s${PRIV_LVL})?\s*(?:role\s${ROLE})? -> Record
