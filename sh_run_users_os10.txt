@@ -1,0 +1,7 @@
+Value USERNAME (\S+)
+Value ROLE (\S+)
+Value PRIV_LVL (\d+)
+
+Start
+  ^username\s${USERNAME}\spassword\s.*\srole\s${ROLE}\spriv-lvl\s${PRIV_LVL} -> Record
+  
