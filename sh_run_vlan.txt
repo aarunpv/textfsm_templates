@@ -1,4 +1,4 @@
-Value Required L01_INTF ((?:[vV])\S+\s\S+)
+Value Required L01_INTF ([vV]\S+\s\S+)
 Value L02_DESC (.*)
 Value L03_IP (\d.*\d)
 Value L04_MTU (\d+)
@@ -9,7 +9,7 @@ Value L08_V_IP (\d.*\d)
 
 Start
   ^interface\s${L01_INTF} -> if_w_desc
-  ^interface\s(?![Vv])${L01_INTF} -> if_no_desc
+  ^interface\s${L01_INTF} -> if_no_desc
   ^\smtu\s${L04_MTU}
   ^\stagged\s${L05_TAGGED}
   ^\suntagged\s${L05_TAGGED}
