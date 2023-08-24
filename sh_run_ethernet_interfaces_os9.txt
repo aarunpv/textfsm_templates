@@ -5,8 +5,8 @@ Value L04_MTU (\d+)
 Value L05_PORT_CHANNEL (\S+\s\d+)
 
 Start
-  ^interface\s(?![VvPpMmLl])${L01_INTF} -> if_w_desc
-  ^interface\s(?![VvPpMmLl])${L01_INTF} -> if_no_desc
+  ^interface\s(?![VvPp])${L01_INTF} -> if_w_desc
+  ^interface\s(?![VvPp])${L01_INTF} -> if_no_desc
   ^\smtu\s${L04_MTU}
   ^\sport-channel-protocol\sLACP -> port_channel
   ^\s(?:no\s)?shutdown -> Record
