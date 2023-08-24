@@ -1,0 +1,28 @@
+Value Required L01_INTF ((?:[vV])\S+\s\S+)
+Value L02_DESC (.*)
+Value L03_IP (\d.*\d)
+Value L04_MTU (\d+)
+Value L05_TAGGED (\S+\s\S+)
+Value L06_UNTAGGED (\S+\s\S+)
+Value L07_VRRP (\d+)
+Value L08_V_IP (\d.*\d)
+
+Start
+  ^interface\s${L01_INTF} -> if_w_desc
+  ^interface\s(?![Vv])${L01_INTF} -> if_no_desc
+  ^\smtu\s${L04_MTU}
+  ^\stagged\s${L05_TAGGED}
+  ^\suntagged\s${L05_TAGGED}
+  ^vrrp-group\s{L07_VRRP} -> vrrp_conf
+  ^\s(?:no\s)?shutdown -> Record
+  
+
+if_w_desc
+  ^\sdescription\s${L02_DESC} -> Continue
+  ^\s(?:no\s)?ip\saddress(?:\s${L03_IP})? -> Start
+
+if_no_desc
+  ^\s(?:no\s)?ip\saddress(?:\s${L03_IP})? -> Start
+
+vrrp_conf
+  ^\s+virtual-address\s${L08_V_IP} -> Start
