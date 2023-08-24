@@ -1,0 +1,23 @@
+Value Required L01_INTF (\S+\s\S+)
+Value L02_DESC (.*)
+Value L03_IP (\d.*\d)
+Value L04_MTU (\d+)
+Value L05_PORT_CHANNEL (\S+\s\d+)
+
+Start
+  ^interface\s(?![VvPpMmLl])${L01_INTF} -> if_w_desc
+  ^interface\s(?![VvPpMmLl])${L01_INTF} -> if_no_desc
+  ^\smtu\s${L04_MTU}
+  ^\sport-channel-protocol\sLACP -> port_channel
+  ^\s(?:no\s)?shutdown -> Record
+  
+
+if_w_desc
+  ^\sdescription\s${L02_DESC} -> Continue
+  ^\s(?:no\s)?ip\saddress(?:\s${L03_IP})? -> Start
+
+if_no_desc
+  ^\s(?:no\s)?ip\saddress(?:\s${L03_IP})? -> Start
+
+port_channel
+  ^\s+${L05_PORT_CHANNEL}\smode\sactive -> Start
